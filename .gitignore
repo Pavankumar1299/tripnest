@@ -1,0 +1,52 @@
+# IntelliJ
+.idea/
+*.iml
+
+# Maven
+target/
+.mvn/wrapper/maven-wrapper.jar
+
+# Logs
+*.log
+logs/
+
+# Spring Boot
+*.pid
+*.seed
+*.pid.lock
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.env.*
+
+# Application properties (optional if they contain secrets)
+application-local.yml
+application-local.properties
+
+# VS Code
+.vscode/
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# NetBeans
+nbproject/private/
+
+# Build
+build/
+
+# Generated files
+out/
+
+# Temporary files
+*.tmp
+*.swp
+
+# Java
+*.class
