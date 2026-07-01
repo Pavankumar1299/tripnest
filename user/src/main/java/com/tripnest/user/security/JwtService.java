@@ -7,6 +7,8 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Service;
 
+import com.tripnest.user.entity.AppUser;
+
 // import java.security.Key;
 import java.util.Date;
 import java.util.function.Function;
@@ -19,10 +21,11 @@ public class JwtService {
     private static final String SECRET_KEY =
             "1234567890123456789012345678901234567890123456789012345678901234";
 
-    public String generateToken(String email) {
+    public String generateToken(AppUser user) {
 
         return Jwts.builder()
-                .subject(email)
+                .subject(user.getEmail())
+                .claim("role", user.getRole())
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)

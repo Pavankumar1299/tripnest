@@ -48,6 +48,40 @@ public class JwtAuthenticationFilter implements GlobalFilter, Ordered {
 
                 return exchange.getResponse().setComplete();
             }
+            
+            String role = jwtService.extractRole(token);
+            String method = exchange.getRequest().getMethod().toString();
+            // USER Restrictions
+
+            if ("USER".equals(role)) {
+
+                // Hotel
+                if (path.startsWith("/hotels")
+                        && !method.equals("GET")) {
+
+                    exchange.getResponse().setStatusCode(HttpStatus.FORBIDDEN);
+
+                    return exchange.getResponse().setComplete();
+                }
+
+                // Flight
+                if (path.startsWith("/flights")
+                        && !method.equals("GET")) {
+
+                    exchange.getResponse().setStatusCode(HttpStatus.FORBIDDEN);
+
+                    return exchange.getResponse().setComplete();
+                }
+
+                // Booking
+                if (path.equals("/bookings")
+                        && method.equals("GET")) {
+
+                    exchange.getResponse().setStatusCode(HttpStatus.FORBIDDEN);
+                    return exchange.getResponse().setComplete();
+                }
+
+            }
 
         } catch (Exception e) {
 

@@ -67,4 +67,11 @@ public class BookingController {
         return "Booking Cancelled Successfully";
     }
 
+    @GetMapping("/user/{userId}")
+    public List<BookingResponse> getBookingsByUserId(
+            @PathVariable Long userId) {
+
+        return bookingService.getBookingsByUserId(userId);
+    }
+
 }

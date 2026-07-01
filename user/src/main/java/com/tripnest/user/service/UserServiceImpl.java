@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
             throw new ResourceNotFoundException("Invalid email or password.");
         }
 
-        String token = jwtService.generateToken(user.getEmail());
+        String token = jwtService.generateToken(user);
 
         return AuthResponse.builder()
                 .token(token)

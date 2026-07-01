@@ -7,17 +7,6 @@ import com.tripnest.booking.dto.HotelBookingRequest;
 
 import java.util.List;
 
-// public interface BookingService {
-
-//     BookingResponse bookTrip(BookingRequest request);
-
-//     BookingResponse getBookingById(Long id);
-
-//     List<BookingResponse> getAllBookings();
-
-//     void cancelBooking(Long id);
-
-// }
 public interface BookingService {
 
     BookingResponse bookHotel(HotelBookingRequest request);
@@ -29,5 +18,7 @@ public interface BookingService {
     List<BookingResponse> getAllBookings();
 
     void cancelBooking(Long id);
+
+    List<BookingResponse> getBookingsByUserId(Long userId);
 
 }
