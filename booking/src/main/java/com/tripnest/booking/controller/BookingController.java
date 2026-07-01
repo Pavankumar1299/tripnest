@@ -5,6 +5,9 @@ import com.tripnest.booking.dto.BookingResponse;
 import com.tripnest.booking.dto.FlightBookingRequest;
 import com.tripnest.booking.dto.HotelBookingRequest;
 import com.tripnest.booking.service.BookingService;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 // import reactor.core.publisher.Sinks.One;
@@ -16,6 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/bookings")
+@Tag(name = "Booking APIs", description = "Booking Management APIs")
 @RequiredArgsConstructor
 public class BookingController {
 
@@ -33,6 +37,7 @@ public class BookingController {
     //     return bookingService.bookTrip(request);
     // }
 
+    @Operation(summary = "Book Hotel")
     @PostMapping("/hotel")
     @ResponseStatus(HttpStatus.CREATED)
     public BookingResponse bookHotel(
@@ -41,6 +46,7 @@ public class BookingController {
         return bookingService.bookHotel(request);
     }
 
+    @Operation(summary = "Book Flight")
     @PostMapping("/flight")
     @ResponseStatus(HttpStatus.CREATED)
     public BookingResponse bookFlight(
@@ -49,16 +55,20 @@ public class BookingController {
         return bookingService.bookFlight(request);
     }
 
+    @Operation(summary = "Get Booking By ID")
     @GetMapping("/{id}")
     public BookingResponse getBookingById(@PathVariable Long id){
         return bookingService.getBookingById(id);
     }
 
+    @Operation(summary = "All Booking")
     @GetMapping
     public List<BookingResponse> getAllBookings(){
         return bookingService.getAllBookings();
     }
 
+
+    @Operation(summary = "Cancel Booking")
     @PutMapping("/cancel/{id}")
     public String cancelBooking(@PathVariable Long id){
 
@@ -67,6 +77,7 @@ public class BookingController {
         return "Booking Cancelled Successfully";
     }
 
+    @Operation(summary = "Get Booking By User ID")
     @GetMapping("/user/{userId}")
     public List<BookingResponse> getBookingsByUserId(
             @PathVariable Long userId) {
