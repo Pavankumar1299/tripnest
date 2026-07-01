@@ -4,13 +4,13 @@ TripNest is a Spring Boot Microservices project that simulates an online travel 
 
 ---
 
-## 🚀 Features
+## ✨ Features
 
 ### User Service
 - User Registration
 - User Login
-- JWT Token Generation
-- Password Encryption using BCrypt
+- JWT Authentication
+- BCrypt Password Encryption
 
 ### Hotel Service
 - Add Hotel
@@ -29,14 +29,17 @@ TripNest is a Spring Boot Microservices project that simulates an online travel 
 - Flight Booking
 - Cancel Booking
 - View Booking Details
-- OpenFeign Communication with Hotel, Flight and User Services
+- OpenFeign Communication
 
 ### Infrastructure
 - Eureka Discovery Server
 - Spring Cloud API Gateway
-- Spring Security
 - JWT Authentication
+- Role-Based Authorization (ADMIN / USER)
+- Spring Security
 - OpenFeign
+- Swagger/OpenAPI Documentation
+- Docker & Docker Compose
 - Separate MySQL Database for Each Service
 
 ---
@@ -70,9 +73,12 @@ User Service   Hotel Service   Flight Service   Booking Service
 - Spring Data JPA
 - Hibernate
 - MySQL
+- Docker
+- Docker Compose
+- Swagger (OpenAPI)
+- JWT
 - Maven
 - Lombok
-- JWT
 - Postman
 - Git & GitHub
 
@@ -89,6 +95,8 @@ TripNest
 ├── hotel-service
 ├── flight-service
 ├── booking-service
+├── docker-compose.yml
+├── init.sql
 └── README.md
 ```
 
@@ -193,13 +201,15 @@ Each microservice maintains its own database.
 
 ## ▶️ How to Run
 
-### 1. Clone Repository
+### Option 1: Run Locally
+
+#### Clone Repository
 
 ```bash
 git clone https://github.com/<your-username>/TripNest.git
 ```
 
-### 2. Create Databases
+#### Create Databases
 
 ```
 user_db
@@ -208,9 +218,9 @@ flight_db
 booking_db
 ```
 
-### 3. Start Services
+#### Start Services
 
-Run services in the following order:
+Run the services in the following order:
 
 1. Eureka Server
 2. API Gateway
@@ -219,53 +229,95 @@ Run services in the following order:
 5. Flight Service
 6. Booking Service
 
----
-
-## 📬 Sample APIs
-
-### Register User
+Open Eureka Dashboard
 
 ```
-POST /users/register
-```
-
-### Login
-
-```
-POST /users/login
-```
-
-### Add Hotel
-
-```
-POST /hotels
-```
-
-### Add Flight
-
-```
-POST /flights
-```
-
-### Book Hotel
-
-```
-POST /bookings/hotel
-```
-
-### Book Flight
-
-```
-POST /bookings/flight
+http://localhost:8761
 ```
 
 ---
+
+### Option 2: Run with Docker
+
+Build the project
+
+```bash
+mvn clean package
+```
+
+Build Docker images
+
+```bash
+docker compose build
+```
+
+Start all services
+
+```bash
+docker compose up
+```
+
+or
+
+```bash
+docker compose up -d
+```
+
+Open Eureka Dashboard
+
+```
+http://localhost:8761
+```
+
+Stop containers
+
+```bash
+docker compose down
+```
+
+---
+
+## 📚 API Documentation
+
+Swagger UI
+
+```
+http://localhost:8081/swagger-ui/index.html
+http://localhost:8082/swagger-ui/index.html
+http://localhost:8083/swagger-ui/index.html
+http://localhost:8084/swagger-ui/index.html
+```
+
+## 🔐 Authentication
+
+TripNest uses JWT Authentication with Role-Based Authorization.
+
+### Public APIs
+
+- Register
+- Login
+
+### ADMIN
+
+- Manage Hotels
+- Manage Flights
+
+### USER
+
+- View Hotels
+- View Flights
+- Book Hotels
+- Book Flights
+- View Own Bookings
+
+Example Header
+
+```
+Authorization: Bearer <JWT_TOKEN>
+```
 
 ## 📈 Future Enhancements
 
-- Docker & Docker Compose
-- Swagger/OpenAPI Documentation
-- Role-Based Authorization (ADMIN / USER)
 - Payment Service
 - Email Notification
 - Booking History
@@ -277,12 +329,12 @@ POST /bookings/flight
 
 ## 👨‍💻 Author
 
-**Pavan Pattar**
+**Pavankumar Pattar**
 
 Java Backend Developer
 
 Tech Stack:
-Java • Spring Boot • Spring Security • Spring Cloud • Hibernate • JPA • MySQL • OpenFeign • JWT • Maven • Git
+Java • Spring Boot • Spring Security • Spring Cloud • Hibernate • JPA • MySQL • OpenFeign • JWT • Maven • Git • SwaggerUI • Docker
 
 ---
 
